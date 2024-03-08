@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="icon-up" viewBox="0 0 35 35">
+    <path d="M17.5 8.75l-12.25 17.5h6.25v8.75h12.5v-8.75h6.25z"/>
+  </symbol>
+  <symbol id="icon-down" viewBox="0 0 35 35">
+    <path d="M17.5 26.25l12.25-17.5h-6.25v-8.75h-12.5v8.75h-6.25z"/>
+  </symbol>
+</svg>
