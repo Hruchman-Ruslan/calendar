@@ -10,7 +10,9 @@ interface CalendarDaysProps {
 export const CalendarDays: React.FC<CalendarDaysProps> = ({ currentDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleModal = () => setIsModalOpen((prevState) => !prevState);
+  const toggleModal = () => {
+    setIsModalOpen((prevState) => !prevState);
+  };
 
   return (
     <>
