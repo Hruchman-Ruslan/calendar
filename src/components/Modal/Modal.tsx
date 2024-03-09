@@ -1,12 +1,13 @@
 import React, { MouseEvent, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Content, Wrapper } from "./Modal.styled";
+import { Form } from "..";
+
+const modalRoot = document.getElementById("modal-root") as Element;
 
 interface ModalProps {
   toggle: () => void;
 }
-
-const modalRoot = document.getElementById("modal-root") as Element;
 
 export const Modal: React.FC<ModalProps> = ({ toggle }) => {
   useEffect(() => {
@@ -30,9 +31,7 @@ export const Modal: React.FC<ModalProps> = ({ toggle }) => {
   return createPortal(
     <Wrapper onClick={handleCloseOverlay}>
       <Content>
-        <div>
-          <h2>Your task</h2>
-        </div>
+        <Form toggle={toggle} />
       </Content>
     </Wrapper>,
     modalRoot
