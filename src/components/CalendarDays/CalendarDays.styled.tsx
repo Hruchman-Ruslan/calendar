@@ -13,5 +13,4 @@ export const Item = styled.li`
 
 export const Text = styled.p`
   padding: 10px;
-  color: #fff;
 `;

@@ -19,11 +19,11 @@ export const GlobalStyles = css`
   body {
     margin: 0;
     font-family: "Manrope", sans-serif;
-    font-weight: 400;
+    font-weight: 600;
     font-size: ${theme.fontSizes.medium};
     font-style: normal;
     color: ${theme.colors.lightGray};
-    background-color: ${theme.colors.black};
+    background-color: ${theme.colors.bgColor};
   }
 
   h1,

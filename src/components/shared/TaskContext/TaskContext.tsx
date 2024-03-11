@@ -1,22 +1,38 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, ReactNode } from "react";
+import { Value } from "../..";
 
 interface TaskContextType {
-  task: string;
-  setTask: (task: string) => void;
+  tasks: { [date: string]: { task: string; difficulty: Value } };
+  updateTask: (date: string, task: string, difficulty: Value) => void;
+  setTasks: React.Dispatch<
+    React.SetStateAction<{
+      [date: string]: { task: string; difficulty: Value };
+    }>
+  >;
 }
 
 export const TaskContext = createContext<TaskContextType>({
-  task: "",
-  setTask: () => {},
+  tasks: {},
+  updateTask: () => {},
+  setTasks: () => {},
 });
 
-export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({
+export const TaskProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [task, setTask] = useState<string>("");
+  const [tasks, setTasks] = useState<{
+    [date: string]: { task: string; difficulty: Value };
+  }>({});
+
+  const updateTask = (date: string, task: string, difficulty: Value) => {
+    setTasks((prevTasks) => ({
+      ...prevTasks,
+      [date]: { task, difficulty },
+    }));
+  };
 
   return (
-    <TaskContext.Provider value={{ task, setTask }}>
+    <TaskContext.Provider value={{ tasks, updateTask, setTasks }}>
       {children}
     </TaskContext.Provider>
   );
