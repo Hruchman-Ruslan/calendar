@@ -11,7 +11,7 @@ interface TaskContextType {
   tasks: {
     [date: string]: Task[];
   };
-  updateTask: (date: string, task: string, difficulty: Value) => void;
+  addTask: (date: string, task: string, difficulty: Value) => void;
   setTasks: React.Dispatch<
     React.SetStateAction<{
       [date: string]: Task[];
@@ -21,7 +21,7 @@ interface TaskContextType {
 
 export const TaskContext = createContext<TaskContextType>({
   tasks: {},
-  updateTask: () => {},
+  addTask: () => {},
   setTasks: () => {},
 });
 
@@ -32,17 +32,14 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({
     [date: string]: Task[];
   }>({});
 
-  const updateTask = (date: string, task: string, difficulty: Value) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = { ...prevTasks };
-      const idTask = generateId();
-      if (updatedTasks[date]) {
-        updatedTasks[date].push({ idTask, task, difficulty });
-      } else {
-        updatedTasks[date] = [{ idTask, task, difficulty }];
-      }
-      return updatedTasks;
-    });
+  const addTask = (date: string, task: string, difficulty: Value) => {
+    setTasks((prevTasks) => ({
+      ...prevTasks,
+      [date]: [
+        ...(prevTasks[date] || []),
+        { idTask: generateId(), task, difficulty },
+      ],
+    }));
   };
 
   const generateId = () => {
@@ -50,7 +47,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, updateTask, setTasks }}>
+    <TaskContext.Provider value={{ tasks, addTask, setTasks }}>
       {children}
     </TaskContext.Provider>
   );
