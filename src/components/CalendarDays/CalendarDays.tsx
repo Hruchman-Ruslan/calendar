@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { getDays } from "../../utils";
 import { Modal } from "..";
 import { Form } from "..";
@@ -11,8 +11,8 @@ interface CalendarDaysProps {
 }
 
 export const CalendarDays: React.FC<CalendarDaysProps> = ({ currentDate }) => {
-  const [selectedDate, setSelectedDate] = useState<string>("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = React.useState<string>("");
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
   const { tasks, setTasks } = useTask();
 
   const toggleModal = (date: string) => {
@@ -32,9 +32,17 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({ currentDate }) => {
     if (draggedDay !== day) {
       const updatedTasks = { ...tasks };
       const draggedTask = updatedTasks[draggedDay];
-      delete updatedTasks[draggedDay];
 
-      updatedTasks[day] = draggedTask;
+      const remainingTasks = updatedTasks[draggedDay].filter(
+        (task) => task.idTask !== draggedTask[0].idTask
+      );
+      if (!remainingTasks.length) {
+        delete updatedTasks[draggedDay];
+      } else {
+        updatedTasks[draggedDay] = remainingTasks;
+      }
+
+      updatedTasks[day] = [...(updatedTasks[day] || []), draggedTask[0]];
       setTasks(updatedTasks);
     }
   };
@@ -52,16 +60,17 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({ currentDate }) => {
           <Item
             key={day}
             onClick={() => toggleModal(day.toString())}
-            onDrop={(e) => handleDrop(day.toString())(e)}
+            onDrop={handleDrop(day.toString())}
             onDragOver={handleDragOver}
           >
             <Text>{day}</Text>
-            {tasks[day] && (
+            {tasks[day]?.map((task) => (
               <Card
-                task={tasks[day]}
+                key={task.idTask}
+                task={task}
                 onDragStart={handleDragStart(day.toString())}
               />
-            )}
+            ))}
           </Item>
         ))}
       </List>

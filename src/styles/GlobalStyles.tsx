@@ -22,7 +22,7 @@ export const GlobalStyles = css`
     font-weight: 600;
     font-size: ${theme.fontSizes.medium};
     font-style: normal;
-    color: ${theme.colors.lightGray};
+    color: ${theme.colors.mainColor};
     background-color: ${theme.colors.bgColor};
   }
 

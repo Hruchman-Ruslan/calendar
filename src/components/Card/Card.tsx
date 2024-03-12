@@ -4,7 +4,7 @@ import { Value } from "..";
 import { Decor, Content, Wrapper } from "./Card.styled";
 
 interface CardContentProps {
-  task: { task: string; difficulty: Value };
+  task: { idTask: string; task: string; difficulty: Value };
   onDragStart: (e: React.DragEvent<HTMLDivElement>) => void;
 }
 
