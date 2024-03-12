@@ -8,3 +8,5 @@ export * from "./CalendarDays/CalendarDays.tsx";
 export * from "./Modal/Modal.tsx";
 export * from "./Select/Select.tsx";
 export * from "./Form/Form.tsx";
+export * from "./File/FileExport.tsx";
+export * from "./File/FileImport.tsx";

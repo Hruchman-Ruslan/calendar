@@ -17,4 +17,7 @@ export const List = styled.ul`
 
 export const Item = styled.li``;
 
-export const Title = styled.h2``;
+export const Title = styled.h2`
+  font-size: 28px;
+  color: #333536;
+`;

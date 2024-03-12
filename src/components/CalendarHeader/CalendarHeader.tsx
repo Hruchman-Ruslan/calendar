@@ -1,5 +1,5 @@
 import { Item, List, Title, Wrapper } from "./CalendarHeader.styled";
-import { Icon } from "..";
+import { FileExport, FileImport, Icon } from "..";
 
 export interface CalendarHeaderProps {
   previousMonth: () => void;
@@ -34,6 +34,12 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
             width={30}
             height={30}
           />
+        </Item>
+        <Item>
+          <FileExport />
+        </Item>
+        <Item>
+          <FileImport />
         </Item>
       </List>
       <Title>
