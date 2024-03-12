@@ -1,7 +1,7 @@
 import React, { createContext, useState, ReactNode } from "react";
 import { Value } from "../..";
 
-interface Task {
+export interface Task {
   idTask: string;
   task: string;
   difficulty: Value;

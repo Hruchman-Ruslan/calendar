@@ -1,56 +1,52 @@
-import React from "react";
-import { getDays } from "../../utils";
+import React, { useState, useEffect } from "react";
+import {
+  getDays,
+  handleDragOver,
+  handleDragStart,
+  handleDrop,
+  handleMoveDown,
+  handleMoveUp,
+} from "../../utils";
 import { Modal } from "..";
 import { Form } from "..";
-import { useTask } from "../shared/TaskContext";
+import { Task, useTask } from "../shared/TaskContext";
 import { Card } from "../Card/Card";
-import { Item, List, Text } from "./CalendarDays.styled";
+import { Item, List, Text, Wrapper } from "./CalendarDays.styled";
+import { fetchHolidays } from "../../api";
+import { HolidayList } from "../HolidayList/HolidayList";
+
+interface Holiday {
+  date: string;
+  name: string;
+}
 
 interface CalendarDaysProps {
   currentDate: Date;
+  countryCode: string;
 }
 
-export const CalendarDays: React.FC<CalendarDaysProps> = ({ currentDate }) => {
-  const [selectedDate, setSelectedDate] = React.useState<string>("");
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+export const CalendarDays: React.FC<CalendarDaysProps> = ({
+  currentDate,
+  countryCode,
+}) => {
+  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { tasks, setTasks } = useTask();
+  const [holidays, setHolidays] = useState<Holiday[]>([]);
+
+  useEffect(() => {
+    const fetchHolidaysData = async () => {
+      const year = currentDate.getFullYear();
+      const data = await fetchHolidays(year, countryCode);
+      setHolidays(data);
+    };
+
+    fetchHolidaysData();
+  }, [currentDate, countryCode]);
 
   const toggleModal = (date: string) => {
     setSelectedDate(date);
     setIsModalOpen((prevState) => !prevState);
-  };
-
-  const handleDragStart =
-    (day: string) => (e: React.DragEvent<HTMLDivElement>) => {
-      e.dataTransfer.setData("text/plain", day);
-    };
-
-  const handleDrop = (day: string) => (e: React.DragEvent<HTMLLIElement>) => {
-    e.preventDefault();
-    const draggedDay = e.dataTransfer.getData("text/plain");
-
-    if (draggedDay !== day) {
-      const updatedTasks = { ...tasks };
-      const draggedTask = updatedTasks[draggedDay];
-
-      const remainingTasks = updatedTasks[draggedDay].filter(
-        (task) => task.idTask !== draggedTask[0].idTask
-      );
-      if (!remainingTasks.length) {
-        delete updatedTasks[draggedDay];
-      } else {
-        updatedTasks[draggedDay] = remainingTasks;
-      }
-
-      updatedTasks[day] = [...(updatedTasks[day] || []), draggedTask[0]];
-      setTasks(updatedTasks);
-    }
-  };
-
-  const handleDragOver = (
-    e: React.DragEvent<HTMLUListElement> | React.DragEvent<HTMLLIElement>
-  ) => {
-    e.preventDefault();
   };
 
   return (
@@ -60,15 +56,28 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({ currentDate }) => {
           <Item
             key={day}
             onClick={() => toggleModal(day.toString())}
-            onDrop={handleDrop(day.toString())}
+            onDrop={handleDrop(day.toString(), tasks, setTasks)}
             onDragOver={handleDragOver}
           >
-            <Text>{day}</Text>
-            {tasks[day]?.map((task) => (
+            <Wrapper>
+              <Text>{day}</Text>
+              <HolidayList
+                holidays={holidays}
+                currentDate={currentDate}
+                day={day}
+              />
+            </Wrapper>
+            {tasks[day]?.map((task: Task) => (
               <Card
                 key={task.idTask}
                 task={task}
                 onDragStart={handleDragStart(day.toString())}
+                onMoveUp={() =>
+                  handleMoveUp(day.toString(), task.idTask, tasks, setTasks)
+                }
+                onMoveDown={() =>
+                  handleMoveDown(day.toString(), task.idTask, tasks, setTasks)
+                }
               />
             ))}
           </Item>
