@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const List = styled.ul`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(5, minmax(150px, 1fr));
   gap: 10px;
 `;
 
@@ -16,4 +16,10 @@ export const Text = styled.p`
   color: #84888b;
   font-size: 18px;
   margin-bottom: 5px;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;

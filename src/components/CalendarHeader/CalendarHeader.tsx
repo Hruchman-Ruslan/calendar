@@ -1,4 +1,4 @@
-import { Item, List, Title, Wrapper } from "./CalendarHeader.styled";
+import { Input, Item, List, Title, Wrapper } from "./CalendarHeader.styled";
 import { FileExport, FileImport, Icon } from "..";
 
 export interface CalendarHeaderProps {
@@ -6,6 +6,7 @@ export interface CalendarHeaderProps {
   nextMonth: () => void;
   months: string[];
   currentDate: Date;
+  onCountryChange: (countryCode: string) => void;
 }
 
 export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
@@ -13,7 +14,11 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   nextMonth,
   months,
   currentDate,
+  onCountryChange,
 }) => {
+  const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onCountryChange(event.target.value);
+  };
   return (
     <Wrapper>
       <List>
@@ -40,6 +45,13 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
         </Item>
         <Item>
           <FileImport />
+        </Item>
+        <Item>
+          <Input
+            type="text"
+            placeholder="Code"
+            onChange={handleCountryChange}
+          />
         </Item>
       </List>
       <Title>

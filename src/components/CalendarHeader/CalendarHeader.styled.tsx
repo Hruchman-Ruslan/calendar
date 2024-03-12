@@ -21,3 +21,10 @@ export const Title = styled.h2`
   font-size: 28px;
   color: #333536;
 `;
+
+export const Input = styled.input`
+  width: 40px;
+  font-size: 10px;
+  padding: 3px;
+  text-align: center;
+`;
