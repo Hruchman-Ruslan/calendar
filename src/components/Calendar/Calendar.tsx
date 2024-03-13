@@ -6,7 +6,12 @@ import { CalendarDays, CalendarHeader, WeekDays } from "..";
 export const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [countryCode, setCountryCode] = useState("UA");
+  const [searchText, setSearchText] = useState<string>("");
   const months = useMonths();
+
+  const handleSearchTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
 
   const nextMonth = () => {
     setCurrentDate((prevDate) => {
@@ -36,9 +41,15 @@ export const Calendar = () => {
         months={months}
         currentDate={currentDate}
         onCountryChange={handleCountryChange}
+        handleSearchTextChange={handleSearchTextChange}
+        searchText={searchText}
       />
       <WeekDays />
-      <CalendarDays currentDate={currentDate} countryCode={countryCode} />
+      <CalendarDays
+        currentDate={currentDate}
+        countryCode={countryCode}
+        searchText={searchText}
+      />
     </Section>
   );
 };

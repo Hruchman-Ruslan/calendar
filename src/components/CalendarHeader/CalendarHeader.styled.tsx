@@ -28,3 +28,10 @@ export const Input = styled.input`
   padding: 3px;
   text-align: center;
 `;
+
+export const InputSearch = styled.input`
+  width: 100px;
+  font-size: 10px;
+  padding: 3px;
+  text-align: center;
+`;
