@@ -23,11 +23,13 @@ interface Holiday {
 interface CalendarDaysProps {
   currentDate: Date;
   countryCode: string;
+  searchText: string;
 }
 
 export const CalendarDays: React.FC<CalendarDaysProps> = ({
   currentDate,
   countryCode,
+  searchText,
 }) => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,6 +53,9 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
     setIsModalOpen((prevState) => !prevState);
   };
 
+  const taskMatchesSearch = (task: Task) =>
+    task.task.toLowerCase().includes(searchText.toLowerCase());
+
   return (
     <>
       <List onDragOver={handleDragOver}>
@@ -69,7 +74,7 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
                 day={day}
               />
             </Wrapper>
-            {tasks[day]?.map((task: Task) => (
+            {tasks[day]?.filter(taskMatchesSearch).map((task: Task) => (
               <Card
                 key={task.idTask}
                 task={task}

@@ -1,4 +1,11 @@
-import { Input, Item, List, Title, Wrapper } from "./CalendarHeader.styled";
+import {
+  Input,
+  InputSearch,
+  Item,
+  List,
+  Title,
+  Wrapper,
+} from "./CalendarHeader.styled";
 import { FileExport, FileImport, Icon } from "..";
 
 export interface CalendarHeaderProps {
@@ -7,6 +14,8 @@ export interface CalendarHeaderProps {
   months: string[];
   currentDate: Date;
   onCountryChange: (countryCode: string) => void;
+  handleSearchTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  searchText: string;
 }
 
 export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
@@ -15,6 +24,8 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   months,
   currentDate,
   onCountryChange,
+  handleSearchTextChange,
+  searchText,
 }) => {
   const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const countryCode = event.target.value;
@@ -50,6 +61,15 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
             type="text"
             placeholder="Code"
             onChange={handleCountryChange}
+          />
+        </Item>
+        <Item>
+          <InputSearch
+            type="text"
+            value={searchText}
+            onChange={handleSearchTextChange}
+            placeholder="Search tasks..."
+            style={{ marginBottom: "10px" }}
           />
         </Item>
       </List>
