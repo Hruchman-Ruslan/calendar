@@ -1,4 +1,4 @@
-import React, { createContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode, FC } from "react";
 import { Value } from "../..";
 
 export interface Task {
@@ -25,25 +25,23 @@ export const TaskContext = createContext<TaskContextType>({
   setTasks: () => {},
 });
 
-export const TaskProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const TaskProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [tasks, setTasks] = useState<{
     [date: string]: Task[];
   }>({});
 
   const addTask = (date: string, task: string, difficulty: Value) => {
-    setTasks((prevTasks) => ({
-      ...prevTasks,
-      [date]: [
-        ...(prevTasks[date] || []),
-        { idTask: generateId(), task, difficulty },
-      ],
-    }));
-  };
-
-  const generateId = () => {
-    return Math.random().toString(36).substr(2, 9);
+    setTasks((prevTasks) => {
+      const newTask = {
+        idTask: Date.now().toString(),
+        task,
+        difficulty,
+      };
+      return {
+        ...prevTasks,
+        [date]: [...(prevTasks[date] || []), newTask],
+      };
+    });
   };
 
   return (

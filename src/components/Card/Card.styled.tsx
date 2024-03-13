@@ -21,3 +21,9 @@ export const Decor = styled.span`
 export const Content = styled.span`
   font-size: 12px;
 `;
+
+export const Box = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
