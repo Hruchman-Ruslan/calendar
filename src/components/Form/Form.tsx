@@ -10,7 +10,7 @@ interface FormProps {
 
 export const Form: React.FC<FormProps> = ({ date, toggle }) => {
   const { addTask } = useTask();
-  const [task, setTaskValue] = React.useState("");
+  const [taskValue, setTaskValue] = React.useState("");
   const [difficulty, setDifficulty] = React.useState<Value>("Normal");
 
   const handleTaskChange = (
@@ -20,7 +20,7 @@ export const Form: React.FC<FormProps> = ({ date, toggle }) => {
   };
 
   const handleSaveTask = (): void => {
-    addTask(date, task, difficulty);
+    addTask(date, taskValue, difficulty);
     setTaskValue("");
     toggle();
   };
@@ -29,7 +29,7 @@ export const Form: React.FC<FormProps> = ({ date, toggle }) => {
     <>
       <Select setSelected={setDifficulty} selected={difficulty} />
       <Wrapper>
-        <TaskInput value={task} onChange={handleTaskChange} />
+        <TaskInput value={taskValue} onChange={handleTaskChange} />
         <SaveButton onClick={handleSaveTask}>Save task</SaveButton>
       </Wrapper>
     </>
