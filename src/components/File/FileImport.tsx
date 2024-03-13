@@ -28,5 +28,9 @@ export const FileImport = () => {
     input.click();
   };
 
-  return <Icon idIcon="import" width={25} height={25} onClick={handleImport} />;
+  return (
+    <div onClick={handleImport}>
+      <Icon idIcon="import" width={25} height={25} />
+    </div>
+  );
 };

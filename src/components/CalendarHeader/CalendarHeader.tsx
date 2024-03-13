@@ -17,28 +17,27 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   onCountryChange,
 }) => {
   const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onCountryChange(event.target.value);
+    const countryCode = event.target.value;
+    if (countryCode.length >= 2) onCountryChange(countryCode);
   };
+
   return (
     <Wrapper>
       <List>
         <Item>
-          <Icon
-            idIcon="down"
-            onClick={previousMonth}
-            aria-label="Previous month"
-            width={30}
-            height={30}
-          />
+          <div onClick={previousMonth}>
+            <Icon
+              idIcon="down"
+              aria-label="Previous month"
+              width={30}
+              height={30}
+            />
+          </div>
         </Item>
         <Item>
-          <Icon
-            idIcon="up"
-            onClick={nextMonth}
-            aria-label="Previous month"
-            width={30}
-            height={30}
-          />
+          <div onClick={nextMonth}>
+            <Icon idIcon="up" aria-label="Next month" width={30} height={30} />
+          </div>
         </Item>
         <Item>
           <FileExport />

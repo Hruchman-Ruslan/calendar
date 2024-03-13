@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { Task, useTask } from "../shared/TaskContext";
 import {
-  getDays,
   handleDragOver,
-  handleDragStart,
   handleDrop,
+  handleDragStart,
   handleMoveDown,
   handleMoveUp,
+  getDays,
 } from "../../utils";
 import { Modal } from "..";
 import { Form } from "..";
-import { Task, useTask } from "../shared/TaskContext";
 import { Card } from "../Card/Card";
 import { Item, List, Text, Wrapper } from "./CalendarDays.styled";
 import { fetchHolidays } from "../../api";
@@ -34,6 +34,8 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
   const { tasks, setTasks } = useTask();
   const [holidays, setHolidays] = useState<Holiday[]>([]);
 
+  const formattedDays = getDays(currentDate).map((day) => day.toString());
+
   useEffect(() => {
     const fetchHolidaysData = async () => {
       const year = currentDate.getFullYear();
@@ -52,11 +54,11 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
   return (
     <>
       <List onDragOver={handleDragOver}>
-        {getDays(currentDate).map((day) => (
+        {formattedDays.map((day) => (
           <Item
             key={day}
-            onClick={() => toggleModal(day.toString())}
-            onDrop={handleDrop(day.toString(), tasks, setTasks)}
+            onClick={() => toggleModal(day)}
+            onDrop={handleDrop(day, tasks, setTasks)}
             onDragOver={handleDragOver}
           >
             <Wrapper>
@@ -71,12 +73,10 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
               <Card
                 key={task.idTask}
                 task={task}
-                onDragStart={handleDragStart(day.toString())}
-                onMoveUp={() =>
-                  handleMoveUp(day.toString(), task.idTask, tasks, setTasks)
-                }
+                onDragStart={handleDragStart(day)}
+                onMoveUp={() => handleMoveUp(day, task.idTask, tasks, setTasks)}
                 onMoveDown={() =>
-                  handleMoveDown(day.toString(), task.idTask, tasks, setTasks)
+                  handleMoveDown(day, task.idTask, tasks, setTasks)
                 }
               />
             ))}

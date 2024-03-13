@@ -15,5 +15,9 @@ export const FileExport = () => {
     URL.revokeObjectURL(url);
   };
 
-  return <Icon idIcon="export" onClick={handleExport} width={25} height={25} />;
+  return (
+    <div onClick={handleExport}>
+      <Icon idIcon="export" width={25} height={25} />
+    </div>
+  );
 };

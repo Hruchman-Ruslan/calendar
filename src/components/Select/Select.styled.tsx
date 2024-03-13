@@ -4,6 +4,8 @@ export const Wrapper = styled.div`
   position: relative;
 
   text-align: end;
+
+  margin-bottom: 20px;
 `;
 
 export const SelectMenu = styled.div`

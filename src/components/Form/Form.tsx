@@ -14,7 +14,7 @@ export const Form: React.FC<FormProps> = ({ date, toggle }) => {
   const [difficulty, setDifficulty] = React.useState<Value>("Normal");
 
   const handleTaskChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setTaskValue(event.target.value);
   };

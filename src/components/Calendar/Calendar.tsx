@@ -5,7 +5,7 @@ import { CalendarDays, CalendarHeader, WeekDays } from "..";
 
 export const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [countryCode, setCountryCode] = useState("US");
+  const [countryCode, setCountryCode] = useState("UA");
   const months = useMonths();
 
   const nextMonth = () => {

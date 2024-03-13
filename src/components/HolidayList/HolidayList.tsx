@@ -9,7 +9,7 @@ interface Holiday {
 interface HolidayListProps {
   holidays: Holiday[];
   currentDate: Date;
-  day: number;
+  day: string;
 }
 
 export const HolidayList: React.FC<HolidayListProps> = ({
