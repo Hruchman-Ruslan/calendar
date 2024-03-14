@@ -7,9 +7,16 @@ export const List = styled.ul`
   gap: 10px;
 `;
 
-export const Item = styled.li`
-  background-color: #f1eded;
+export const Item = styled.li<{ today?: boolean }>`
+  background-color: ${(props) => (props.today ? "#db6b26" : "#f1eded")};
   padding: 8px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => (props.today ? "#db6b26" : "#e1e1e1")};
+  }
 `;
 
 export const Text = styled.p`

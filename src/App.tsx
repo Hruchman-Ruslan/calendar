@@ -1,16 +1,17 @@
-import { Calendar } from "./components";
-import { Container } from "./components/shared";
-import { TaskProvider } from "./context";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Layout } from "./components";
+import { lazy } from "react";
+
+const CalendarPage = lazy(() => import("./page/CalendarPage"));
 
 function App() {
   return (
-    <>
-      <TaskProvider>
-        <Container>
-          <Calendar />
-        </Container>
-      </TaskProvider>
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<CalendarPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Route>
+    </Routes>
   );
 }
 
