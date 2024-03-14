@@ -21,8 +21,8 @@ const options: { label: Value; color: Color }[] = [
 ];
 
 export const Select: React.FC<{
-  setSelected: (value: Value) => void;
-  selected: Value;
+  setSelected: (value: Value | null) => void;
+  selected: Value | null;
 }> = ({ setSelected, selected }) => {
   const [active, setActive] = useState<boolean>(false);
 
@@ -33,11 +33,18 @@ export const Select: React.FC<{
     setActive(false);
   };
 
+  const handleReset = () => {
+    setSelected(null);
+    setActive(false);
+  };
+
   return (
     <Wrapper>
       <SelectMenu onClick={toggleDropdown}>
-        <DropdownColor style={{ backgroundColor: getColor(selected) }} />
-        <DropdownDefault>{selected}</DropdownDefault>
+        <DropdownColor
+          style={{ backgroundColor: getColor(selected || "Normal") }}
+        />
+        <DropdownDefault>{selected || "Normal"}</DropdownDefault>
       </SelectMenu>
       {active && (
         <Dropdown>
@@ -49,6 +56,7 @@ export const Select: React.FC<{
               <DropdownText>{option.label}</DropdownText>
             </DropdownItem>
           ))}
+          <DropdownItem onClick={handleReset}>Reset</DropdownItem>
         </Dropdown>
       )}
     </Wrapper>

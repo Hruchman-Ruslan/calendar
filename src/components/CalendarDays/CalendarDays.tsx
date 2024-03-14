@@ -14,6 +14,7 @@ import { Card } from "../Card/Card";
 import { Item, List, Text, Wrapper } from "./CalendarDays.styled";
 import { fetchHolidays } from "../../api";
 import { HolidayList } from "../HolidayList/HolidayList";
+import { Value as Difficulty } from "../Select/Select";
 
 interface Holiday {
   date: string;
@@ -24,12 +25,14 @@ interface CalendarDaysProps {
   currentDate: Date;
   countryCode: string;
   searchText: string;
+  selectedDifficulty: Difficulty | null;
 }
 
 export const CalendarDays: React.FC<CalendarDaysProps> = ({
   currentDate,
   countryCode,
   searchText,
+  selectedDifficulty,
 }) => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,6 +59,9 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
   const taskMatchesSearch = (task: Task) =>
     task.task.toLowerCase().includes(searchText.toLowerCase());
 
+  const taskMatchesDifficulty = (task: Task) =>
+    selectedDifficulty ? task.difficulty === selectedDifficulty : true;
+
   return (
     <>
       <List onDragOver={handleDragOver}>
@@ -74,17 +80,22 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
                 day={day}
               />
             </Wrapper>
-            {tasks[day]?.filter(taskMatchesSearch).map((task: Task) => (
-              <Card
-                key={task.idTask}
-                task={task}
-                onDragStart={handleDragStart(day)}
-                onMoveUp={() => handleMoveUp(day, task.idTask, tasks, setTasks)}
-                onMoveDown={() =>
-                  handleMoveDown(day, task.idTask, tasks, setTasks)
-                }
-              />
-            ))}
+            {tasks[day]
+              ?.filter(taskMatchesSearch)
+              .filter(taskMatchesDifficulty)
+              .map((task: Task) => (
+                <Card
+                  key={task.idTask}
+                  task={task}
+                  onDragStart={handleDragStart(day)}
+                  onMoveUp={() =>
+                    handleMoveUp(day, task.idTask, tasks, setTasks)
+                  }
+                  onMoveDown={() =>
+                    handleMoveDown(day, task.idTask, tasks, setTasks)
+                  }
+                />
+              ))}
           </Item>
         ))}
       </List>
