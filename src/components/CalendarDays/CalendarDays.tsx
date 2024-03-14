@@ -7,13 +7,12 @@ import {
   handleMoveUp,
   getDays,
 } from "../../utils";
-import { Modal } from "..";
+import { Modal, Value } from "..";
 import { Form } from "..";
 import { Card } from "../Card/Card";
 import { Item, List, Text, Wrapper } from "./CalendarDays.styled";
 import { fetchHolidays } from "../../api";
 import { HolidayList } from "../HolidayList/HolidayList";
-import { Value } from "../Select/Select";
 import { Task, useTask } from "../../context";
 
 interface Holiday {
