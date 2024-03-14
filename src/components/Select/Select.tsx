@@ -10,14 +10,15 @@ import {
 } from "./Select.styled";
 import { getColor } from "../../utils/getColor";
 
-export type Color = "blue" | "green" | "red" | "purple";
-export type Value = "Normal" | "Easy" | "Hard" | "Postpone";
+export type Color = "blue" | "green" | "red" | "purple" | "orange";
+export type Value = "Meeting" | "Work" | "Study" | "Exercise" | "Other";
 
 const options: { label: Value; color: Color }[] = [
-  { label: "Easy", color: "blue" },
-  { label: "Normal", color: "green" },
-  { label: "Hard", color: "red" },
-  { label: "Postpone", color: "purple" },
+  { label: "Meeting", color: "blue" },
+  { label: "Work", color: "green" },
+  { label: "Study", color: "red" },
+  { label: "Exercise", color: "purple" },
+  { label: "Other", color: "orange" },
 ];
 
 export const Select: React.FC<{
@@ -42,9 +43,9 @@ export const Select: React.FC<{
     <Wrapper>
       <SelectMenu onClick={toggleDropdown}>
         <DropdownColor
-          style={{ backgroundColor: getColor(selected || "Normal") }}
+          style={{ backgroundColor: getColor(selected || "Meeting") }}
         />
-        <DropdownDefault>{selected || "Normal"}</DropdownDefault>
+        <DropdownDefault>{selected || "Meeting"}</DropdownDefault>
       </SelectMenu>
       {active && (
         <Dropdown>

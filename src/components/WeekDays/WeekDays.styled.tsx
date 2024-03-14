@@ -12,4 +12,5 @@ export const Item = styled.li``;
 
 export const Text = styled.p`
   text-align: center;
+  color: #666869;
 `;

@@ -1,15 +1,17 @@
 import { Color, Value } from "../components";
 
-export const getColor = (difficulty: Value): Color => {
-  switch (difficulty) {
-    case "Easy":
+export const getColor = (taskLabel: Value): Color => {
+  switch (taskLabel) {
+    case "Meeting":
       return "blue";
-    case "Normal":
+    case "Work":
       return "green";
-    case "Hard":
+    case "Study":
       return "red";
-    case "Postpone":
+    case "Exercise":
       return "purple";
+    case "Other":
+      return "orange";
     default:
       return "green";
   }

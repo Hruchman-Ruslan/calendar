@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { theme } from "./theme";
 
 export const GlobalStyles = css`
-  @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap");
 
   html {
     box-sizing: border-box;
@@ -18,7 +18,7 @@ export const GlobalStyles = css`
 
   body {
     margin: 0;
-    font-family: "Manrope", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 600;
     font-size: ${theme.fontSizes.medium};
     font-style: normal;

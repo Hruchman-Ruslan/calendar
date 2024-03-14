@@ -15,7 +15,7 @@ export const Icon: FC<IconProps> = ({
   idIcon,
   width,
   height,
-  fill = "#333536",
+  fill = "currentColor",
   onClick,
 }) => {
   return (

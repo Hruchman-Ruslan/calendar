@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Task, useTask } from "../shared/TaskContext";
 import {
   handleDragOver,
   handleDrop,
@@ -14,7 +13,8 @@ import { Card } from "../Card/Card";
 import { Item, List, Text, Wrapper } from "./CalendarDays.styled";
 import { fetchHolidays } from "../../api";
 import { HolidayList } from "../HolidayList/HolidayList";
-import { Value as Difficulty } from "../Select/Select";
+import { Value } from "../Select/Select";
+import { Task, useTask } from "../../context";
 
 interface Holiday {
   date: string;
@@ -25,7 +25,7 @@ interface CalendarDaysProps {
   currentDate: Date;
   countryCode: string;
   searchText: string;
-  selectedDifficulty: Difficulty | null;
+  selectedDifficulty: Value | null;
 }
 
 export const CalendarDays: React.FC<CalendarDaysProps> = ({
