@@ -18,7 +18,12 @@ export const Content = styled.div`
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   width: 300px;
+  /* height: 250px; */
   height: 180px;
   color: black;
   text-align: center;
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
 `;

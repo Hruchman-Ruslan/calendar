@@ -6,7 +6,8 @@ import {
   Title,
   Wrapper,
 } from "./CalendarHeader.styled";
-import { FileExport, FileImport, Icon } from "..";
+import { FileExport, FileImport, Icon, Select } from "..";
+import { Value as Difficulty } from "../Select/Select";
 
 export interface CalendarHeaderProps {
   previousMonth: () => void;
@@ -16,6 +17,9 @@ export interface CalendarHeaderProps {
   onCountryChange: (countryCode: string) => void;
   handleSearchTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchText: string;
+  selectedDifficulty: Difficulty | null;
+  onChangeDifficulty: (difficulty: Difficulty | null) => void;
+  onDownloadButtonClick: () => void;
 }
 
 export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
@@ -26,6 +30,9 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   onCountryChange,
   handleSearchTextChange,
   searchText,
+  selectedDifficulty,
+  onChangeDifficulty,
+  onDownloadButtonClick,
 }) => {
   const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const countryCode = event.target.value;
@@ -71,6 +78,22 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
             placeholder="Search tasks..."
             style={{ marginBottom: "10px" }}
           />
+        </Item>
+        <Item>
+          <Select
+            setSelected={onChangeDifficulty}
+            selected={selectedDifficulty}
+          />
+        </Item>
+        <Item>
+          <div onClick={onDownloadButtonClick}>
+            <Icon
+              idIcon="download"
+              aria-label="Download"
+              width={30}
+              height={30}
+            />
+          </div>
         </Item>
       </List>
       <Title>

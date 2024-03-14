@@ -25,9 +25,13 @@ export const Form: React.FC<FormProps> = ({ date, toggle }) => {
     toggle();
   };
 
+  const handleSelectChange = (value: Value | null) => {
+    setDifficulty(value || "Normal");
+  };
+
   return (
     <>
-      <Select setSelected={setDifficulty} selected={difficulty} />
+      <Select setSelected={handleSelectChange} selected={difficulty} />
       <Wrapper>
         <TaskInput value={taskValue} onChange={handleTaskChange} />
         <SaveButton onClick={handleSaveTask}>Save task</SaveButton>

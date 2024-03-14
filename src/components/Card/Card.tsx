@@ -44,6 +44,10 @@ export const Card: React.FC<CardContentProps> = ({
     e.stopPropagation();
   };
 
+  const handleSelectChange = (value: Value | null) => {
+    setDifficulty(value || "Normal");
+  };
+
   return (
     <Wrapper
       draggable
@@ -56,7 +60,7 @@ export const Card: React.FC<CardContentProps> = ({
     >
       {editing ? (
         <ShowWrapper>
-          <Select setSelected={setDifficulty} selected={difficulty} />
+          <Select setSelected={handleSelectChange} selected={difficulty} />
           <Input type="text" value={taskValue} onChange={handleInputChange} />
           <Button onClick={handleSaveClick}>Save</Button>
         </ShowWrapper>
