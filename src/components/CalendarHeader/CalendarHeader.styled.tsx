@@ -8,30 +8,46 @@ export const Wrapper = styled.div`
   margin-bottom: 20px;
 `;
 
+export const ListIcon = styled.ul`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
 export const List = styled.ul`
   display: flex;
   justify-content: center;
-  align-items: start;
   gap: 20px;
+`;
+
+export const ItemIcon = styled.li`
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    color: orange;
+  }
 `;
 
 export const Item = styled.li``;
 
-export const Title = styled.h2`
+export const Title = styled.h1`
   font-size: 28px;
-  color: #333536;
+  color: #9ca2a7;
 `;
 
 export const Input = styled.input`
   width: 40px;
-  font-size: 10px;
   padding: 3px;
   text-align: center;
+  font-size: 12px;
+  font-weight: 600;
 `;
 
 export const InputSearch = styled.input`
   width: 100px;
-  font-size: 10px;
   padding: 3px;
   text-align: center;
+  font-size: 12px;
+  font-weight: 600;
 `;

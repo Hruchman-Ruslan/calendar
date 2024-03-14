@@ -2,12 +2,14 @@ import {
   Input,
   InputSearch,
   Item,
+  ItemIcon,
   List,
+  ListIcon,
   Title,
   Wrapper,
 } from "./CalendarHeader.styled";
 import { FileExport, FileImport, Icon, Select } from "..";
-import { Value as Difficulty } from "../Select/Select";
+import { Value } from "../Select/Select";
 
 export interface CalendarHeaderProps {
   previousMonth: () => void;
@@ -17,8 +19,8 @@ export interface CalendarHeaderProps {
   onCountryChange: (countryCode: string) => void;
   handleSearchTextChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchText: string;
-  selectedDifficulty: Difficulty | null;
-  onChangeDifficulty: (difficulty: Difficulty | null) => void;
+  selectedDifficulty: Value | null;
+  onChangeDifficulty: (difficulty: Value | null) => void;
   onDownloadButtonClick: () => void;
 }
 
@@ -41,27 +43,53 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
 
   return (
     <Wrapper>
-      <List>
-        <Item>
+      <ListIcon>
+        <ItemIcon>
           <div onClick={previousMonth}>
             <Icon
-              idIcon="down"
+              idIcon="left"
               aria-label="Previous month"
               width={30}
               height={30}
             />
           </div>
-        </Item>
-        <Item>
+        </ItemIcon>
+        <ItemIcon>
           <div onClick={nextMonth}>
-            <Icon idIcon="up" aria-label="Next month" width={30} height={30} />
+            <Icon
+              idIcon="right"
+              aria-label="Next month"
+              width={30}
+              height={30}
+            />
           </div>
-        </Item>
-        <Item>
+        </ItemIcon>
+        <ItemIcon>
           <FileExport />
-        </Item>
-        <Item>
+        </ItemIcon>
+        <ItemIcon>
           <FileImport />
+        </ItemIcon>
+        <ItemIcon>
+          <div onClick={onDownloadButtonClick}>
+            <Icon
+              idIcon="download"
+              aria-label="Download"
+              width={30}
+              height={30}
+            />
+          </div>
+        </ItemIcon>
+      </ListIcon>
+      <Title>
+        {months[currentDate.getMonth()]} {currentDate.getFullYear()}
+      </Title>
+      <List>
+        <Item>
+          <Select
+            setSelected={onChangeDifficulty}
+            selected={selectedDifficulty}
+          />
         </Item>
         <Item>
           <Input
@@ -76,29 +104,9 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
             value={searchText}
             onChange={handleSearchTextChange}
             placeholder="Search tasks..."
-            style={{ marginBottom: "10px" }}
           />
-        </Item>
-        <Item>
-          <Select
-            setSelected={onChangeDifficulty}
-            selected={selectedDifficulty}
-          />
-        </Item>
-        <Item>
-          <div onClick={onDownloadButtonClick}>
-            <Icon
-              idIcon="download"
-              aria-label="Download"
-              width={30}
-              height={30}
-            />
-          </div>
         </Item>
       </List>
-      <Title>
-        {months[currentDate.getMonth()]} {currentDate.getFullYear()}
-      </Title>
     </Wrapper>
   );
 };

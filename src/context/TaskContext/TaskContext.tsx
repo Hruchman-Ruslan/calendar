@@ -1,5 +1,5 @@
 import React, { createContext, useState, ReactNode, FC } from "react";
-import { Value } from "../..";
+import { Value } from "../../components";
 
 export interface Task {
   idTask: string;

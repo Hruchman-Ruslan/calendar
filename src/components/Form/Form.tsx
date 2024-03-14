@@ -1,7 +1,7 @@
 import React from "react";
 import { SaveButton, TaskInput, Wrapper } from "./Form.styled";
 import { Select, Value } from "..";
-import { useTask } from "../shared/TaskContext";
+import { useTask } from "../../context";
 
 interface FormProps {
   date: string;
@@ -11,7 +11,7 @@ interface FormProps {
 export const Form: React.FC<FormProps> = ({ date, toggle }) => {
   const { addTask } = useTask();
   const [taskValue, setTaskValue] = React.useState("");
-  const [difficulty, setDifficulty] = React.useState<Value>("Normal");
+  const [difficulty, setDifficulty] = React.useState<Value>("Meeting");
 
   const handleTaskChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -26,7 +26,7 @@ export const Form: React.FC<FormProps> = ({ date, toggle }) => {
   };
 
   const handleSelectChange = (value: Value | null) => {
-    setDifficulty(value || "Normal");
+    setDifficulty(value || "Meeting");
   };
 
   return (

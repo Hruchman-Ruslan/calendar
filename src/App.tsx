@@ -1,6 +1,6 @@
 import { Calendar } from "./components";
 import { Container } from "./components/shared";
-import { TaskProvider } from "./components/shared/TaskContext";
+import { TaskProvider } from "./context";
 
 function App() {
   return (

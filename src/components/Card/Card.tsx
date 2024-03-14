@@ -8,9 +8,10 @@ import {
   Input,
   ShowWrapper,
   Button,
+  IconWrapper,
 } from "./Card.styled";
-import { Task, useTask } from "../shared/TaskContext";
 import { Icon, Select, Value } from "..";
+import { Task, useTask } from "../../context";
 
 interface CardContentProps {
   task: Task;
@@ -28,7 +29,7 @@ export const Card: React.FC<CardContentProps> = ({
   const { editTask } = useTask();
   const [editing, setEditing] = useState(false);
   const [taskValue, setTaskValue] = useState("");
-  const [difficulty, setDifficulty] = useState<Value>("Normal");
+  const [difficulty, setDifficulty] = useState<Value>("Meeting");
 
   const handleEditClick = () => setEditing(true);
   const handleSaveClick = () => {
@@ -45,7 +46,7 @@ export const Card: React.FC<CardContentProps> = ({
   };
 
   const handleSelectChange = (value: Value | null) => {
-    setDifficulty(value || "Normal");
+    setDifficulty(value || "Meeting");
   };
 
   return (
@@ -70,9 +71,9 @@ export const Card: React.FC<CardContentProps> = ({
             <Decor style={{ color: getColor(task.difficulty) }}>
               {task.difficulty}
             </Decor>
-            <div onClick={handleEditClick}>
+            <IconWrapper onClick={handleEditClick}>
               <Icon idIcon="edit" width={15} height={15} />
-            </div>
+            </IconWrapper>
           </Box>
           <Content>{task.task}</Content>
         </>

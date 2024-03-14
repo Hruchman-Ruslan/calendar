@@ -16,6 +16,7 @@ export const Decor = styled.span`
   text-transform: lowercase;
   margin-bottom: 2px;
   font-size: 12px;
+  font-weight: 600;
 `;
 
 export const Content = styled.span`
@@ -36,6 +37,7 @@ export const Input = styled.input`
   font-size: 16px;
   font-weight: 600;
   text-align: center;
+  margin-top: 10px;
 `;
 
 export const ShowWrapper = styled.div`
@@ -53,4 +55,12 @@ export const Button = styled.button`
   border: none;
   cursor: pointer;
   border-radius: 5px;
+`;
+
+export const IconWrapper = styled.div`
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    color: orange;
+  }
 `;

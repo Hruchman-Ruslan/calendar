@@ -1,5 +1,5 @@
 import React from "react";
-import { Task } from "../components/shared/TaskContext";
+import { Task } from "../context/TaskContext";
 
 export const handleDragStart =
   (day: string) => (e: React.DragEvent<HTMLDivElement>) => {

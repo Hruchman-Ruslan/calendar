@@ -4,8 +4,6 @@ export const Wrapper = styled.div`
   position: relative;
 
   text-align: end;
-
-  margin-bottom: 20px;
 `;
 
 export const SelectMenu = styled.div`
@@ -14,9 +12,7 @@ export const SelectMenu = styled.div`
   cursor: pointer;
 `;
 
-export const DropdownDefault = styled.div`
-  margin-right: 20px;
-`;
+export const DropdownDefault = styled.div``;
 
 export const DropdownText = styled.p`
   cursor: pointer;
