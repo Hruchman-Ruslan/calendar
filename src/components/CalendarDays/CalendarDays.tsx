@@ -7,13 +7,10 @@ import {
   handleMoveUp,
   getDays,
 } from "../../utils";
-import { Modal, Value } from "..";
-import { Form } from "..";
-import { Card } from "../Card/Card";
-import { Item, List, Text, Wrapper } from "./CalendarDays.styled";
+import { Card, Form, HolidayList, Modal, Value } from "..";
 import { fetchHolidays } from "../../api";
-import { HolidayList } from "../HolidayList/HolidayList";
 import { Task, useTask } from "../../context";
+import { Item, List, Text, Wrapper } from "./CalendarDays.styled";
 
 interface Holiday {
   date: string;
@@ -39,6 +36,7 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
   const [holidays, setHolidays] = useState<Holiday[]>([]);
 
   const formattedDays = getDays(currentDate).map((day) => day.toString());
+  const today = new Date().getDate();
 
   useEffect(() => {
     const fetchHolidaysData = async () => {
@@ -70,6 +68,7 @@ export const CalendarDays: React.FC<CalendarDaysProps> = ({
             onClick={() => toggleModal(day)}
             onDrop={handleDrop(day, tasks, setTasks)}
             onDragOver={handleDragOver}
+            today={parseInt(day) === today}
           >
             <Wrapper>
               <Text>{day}</Text>
